@@ -1,0 +1,71 @@
+#!/bin/bash
+
+if [ -e ~/.bash_assigned_vars ]
+then
+    source ~/.bash_assigned_vars
+fi
+
+assign()
+{
+    VarName=$1
+    Path=$2
+
+    if [ "$VarName" == "" ]
+    then
+        # list all assign's
+        echo "Assigned var's:"
+        if [ -e ~/.bash_assigned_vars ]
+        then
+            sed "s/^export set \"\(.*\)\"=\(.*$\)/   \1=\2/" <~/.bash_assigned_vars
+        fi
+        return
+    fi
+    if [ "$VarName" == "--help" ]
+    then
+        echo "Usage:"
+        echo "assign [OPTIONS] var [path]"
+        echo ""
+        echo "Options:"
+        echo "   -d -- Delete assignment"
+        return
+    fi
+
+    # Convert this into a delete command
+    if [ "$Path" == "" ]
+    then
+        Path=$VarName
+        VarName="-d"
+    fi
+
+    if [ "$VarName" == "-d" ]
+    then
+        if [ "$Path" == "" ]
+        then
+            echo "Missing arg"
+            return
+        fi
+        # Remove this assign from the permanent list
+        if [ -e ~/.bash_assigned_vars ]
+        then
+            sed "/^export set \"$Path\"/d" <~/.bash_assigned_vars >~/.bash_assigned_vars_tmp
+            mv ~/.bash_assigned_vars_tmp ~/.bash_assigned_vars
+        fi
+        unset "$Path"
+        return
+    fi
+
+    # Take this path and make it an abs path
+    UsePath=$(readlink -f "$Path")
+
+    # Remove the old one (if any)
+    if [ -e ~/.bash_assigned_vars ]
+    then
+        sed "/^export set \"$VarName\"/d" <~/.bash_assigned_vars >~/.bash_assigned_vars_tmp
+        mv ~/.bash_assigned_vars_tmp ~/.bash_assigned_vars
+    fi
+
+    # Add the new one
+    echo >>~/.bash_assigned_vars "export set \"$VarName\"=$UsePath"
+
+    export set "$VarName"=$UsePath
+}
