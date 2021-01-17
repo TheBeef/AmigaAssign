@@ -73,12 +73,12 @@ future sessions).
 ## Add examples
 Here are some examples of adding vars using assign.
 
-Example                         | Use                                 | Expands to                                     
-------------------------------- | ----------------------------------- | -----------------------------------------------
-assign c /                      | ls $c                               | ls /                                           
-assign doc /home/user/Documents | cp instructions.pdf $doc            | cp instructions.pdf /home/user/Documents       
-assign down ~/Downloads         | cat $down/AscIITable.txt            | cat ~/Downloads/AscIITable.txt                 
-assign docroot /var/www/html    | chmod 777 $docroot/site1/index.html | chmod 777 /var/www/html/site1/index.html       
+Example                           | Use                                   | Expands to
+--------------------------------- | ------------------------------------- | -----------------------------------------------
+`assign c /`                      | `ls $c`                               | `ls /`
+`assign doc /home/user/Documents` | `cp instructions.pdf $doc`            | `cp instructions.pdf /home/user/Documents`
+`assign down ~/Downloads`         | `cat $down/AscIITable.txt`            | `cat ~/Downloads/AscIITable.txt`
+`assign docroot /var/www/html`    | `chmod 777 $docroot/site1/index.html` | `chmod 777 /var/www/html/site1/index.html`
 
 ## Deleting an assignment
 You delete an assignment using the -d option followed by the assignment to delete.  It will be freed from this point on.
