@@ -1,5 +1,5 @@
 # AmigaAssign
-A bash script to provide Amiga style assign command.
+A bash script to provide Amiga style assign command to Linux.
 
 # What is this thing
 This script adds an Amiga like ASSIGN command to Linux (using a bash script).
