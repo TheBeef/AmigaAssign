@@ -85,3 +85,6 @@ You delete an assignment using the -d option followed by the assignment to delet
 
 ## Showing existing assignments
 If you type in assign without any arguments you will get a list of assignments with what they are set to.
+
+**NOTE** When the assign's are listed they will also be reloaded.  This will allow you to update new assigns from another shell to your current one.
+
