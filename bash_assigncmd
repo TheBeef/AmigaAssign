@@ -18,6 +18,9 @@ assign()
         then
             sed "s/^export set \"\(.*\)\"=\(.*$\)/   \1=\2/" <~/.bash_assigned_vars
         fi
+
+        # Reload all assigned vars
+        source ~/.bash_assigned_vars
         return
     fi
     if [ "$VarName" == "--help" ]
